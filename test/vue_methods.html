@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+<head>
+    <title>vue methods test</title>
+</head>
+<body>
+<div id="methods_demo">{{full_name()}}</div>
+<div id="computed_example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+ <div id="watch_example">{{watch_other}}</div>
+ <div id="demo">{{ fullName }}</div>
+
+ <div id="watch-example2">
+  <p>
+    Ask a yes/no question:
+    <input v-model="question">
+  </p>
+  <p>{{ answer }}</p>
+</div>
+</body>
+<script >
+    var vm = new Vue({
+        el: "#methods_demo",
+        data:{
+            fist_name: "jay",
+            second_name: "haha",
+        },
+        methods: {
+            full_name: function(){
+                return this.fist_name+ "_" + this.second_name + "_methods"
+            }
+        }
+    });
+
+    new Vue({
+        el: "#computed_example",
+        data: {
+            message: "hello",
+        },
+        computed: {
+            reversedMessage: function(){
+                return this.message + "_Computed"
+            }
+        }
+    });
+
+ var watch_vm = new Vue({
+  el: '#watch_example',
+  data: {
+    firstName: 'jay',
+    lastName: 'watch',
+    watch_other: 'Foo Bar'
+  },
+  watch: {
+    firstName: function (val) {
+      this.watch_other = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.watch_other = this.firstName + ' ' + val
+    }
+  }
+});
+
+ var demo = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'ls',
+    lastName: 'Bar',
+    fullName: 'Foo Bar'
+  },
+  watch: {
+    firstName: function (val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName: function (val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+  }
+})
+</script>
+</html>

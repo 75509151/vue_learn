@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<script src="https://unpkg.com/vue"></script>
+
+<head>
+    <title>vue first blood</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ message }}</p>
+    </div>
+
+    <div id="app-2">
+    <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+    </div>
+
+    <div id="app-3">
+        <p v-if="seen">现在你看到我了</p>
+    </div>
+
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app-5">
+        <p>{{message}}</p>
+        <button v-on:click="reveseMessage">reveseMessage</button>
+    </div> 
+
+</body>
+<script>
+var app = new Vue({
+    el: "#app",
+    data: {
+        message: "first blood in vue"
+    }
+})
+
+var app2 = new Vue({
+    el: '#app-2',
+    data: {
+        message: 'my title'
+    }
+})
+
+var app3 = new Vue({
+    el: "#app-3",
+    data: {
+        seen: true
+    }
+})
+
+var app4 = new Vue({
+    el: "#app-4",
+    data:{
+        todos: [
+        {text: "first"},
+        {text: "second"},
+        ]
+    }
+})
+
+var app5 = new Vue({
+    el: "#app-5",
+    data: {
+        message: "hello vue"
+    },
+    methods: {
+        reveseMessage: function (argument) {
+            this.message = this.message.split("").reverse().join("")
+        }
+    }
+})
+</script>
+
+</html>
