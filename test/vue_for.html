@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+
+<head>
+    <title>vue for example</title>
+</head>
+
+<body>
+    <ul id="simple_example">
+        {{ni_hao}}
+        <li v-for="item in items">
+            {{item.name}} {{ item.message}}
+        </li>
+    </ul>
+    <ul id="scores_ranking">
+        <li v-for="(student_score, index) in scores_table">
+            {{index}} - {{student_score.name}} - {{student_score.score}}
+        </li>
+    </ul>
+    <ul id="object_example">
+        <li v-for="value in object">
+            {{value}} {{object}}
+        </li>
+    </ul>
+    <div>
+        <span v-for="n in 10">{{ n }} </span>
+    </div>
+
+    </div>
+    <div id="todo-list-example">
+        <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo">
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:key="todo" v-bind:title="todo" v-on:remove="todos.splice(index, 1)"></li>
+        </ul>
+    </div>
+
+    <ul id="for_if_example">
+        <li v-for="item in todos" v-if="!item.is_hide">
+            {{item}}
+        </li>
+    </ul>
+</body>
+<script>
+Vue.component('todo-item', {
+    template: `
+    <li>
+      {{ title }}
+      <button v-on:click="$emit('remove')">X</button>
+    </li>
+  `,
+    props: ['title']
+})
+new Vue({
+    el: '#todo-list-example',
+    data: {
+        newTodoText: '',
+        todos: [
+            'Do the dishes',
+            'Take out the trash',
+            'Mow the lawn'
+        ]
+    },
+    methods: {
+        addNewTodo: function() {
+            this.todos.push(this.newTodoText)
+            this.newTodoText = ''
+        }
+    }
+})
+
+
+var simple_example = new Vue({
+    el: "#simple_example",
+    data: {
+        ni_hao: "hello",
+        items: [{
+            name: "man",
+            message: "love"
+        }, {
+            name: "woman",
+            message: "love to"
+        }]
+    }
+});
+var scores_ranking = new Vue({
+    el: "#scores_ranking",
+    data: {
+        scores_table: [{
+            name: "jay",
+            score: 100
+        }, {
+            name: "who",
+            score: 98
+        }]
+    }
+
+});
+
+var object_example = new Vue({
+    el: "#object_example",
+    data: {
+        object: {
+            name: "jay",
+            age: "200"
+        }
+    }
+});
+
+var for_if_example = new Vue({
+    el: "#for_if_example",
+    data: {
+        todos:[
+        {name: "hahe", is_hide: 0},
+        {name: "lahe", is_hide:1}
+        ]
+
+    }
+});
+</script>
+
+</html>
