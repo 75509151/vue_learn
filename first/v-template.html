@@ -1,0 +1,53 @@
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+
+<head>
+    <title>
+        vue model learn
+    </title>
+</head>
+
+<body>
+    <div id="counter-event-example">
+        <p>{{ total }}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+    <child message="hello!"></child>
+</body>
+<script>
+Vue.component('button-counter', {
+    template: '<button v-on:click="increment">{{ counter }}</button>',
+    data: function() {
+        return {
+            counter: 0
+        }
+    },
+    methods: {
+        increment: function() {
+            this.counter += 1
+            this.$emit('increment')
+        }
+    },
+});
+new Vue({
+    el: '#counter-event-example',
+    data: {
+        total: 0
+    },
+    methods: {
+        incrementTotal: function() {
+            this.total += 1
+        }
+    }
+});
+Vue.component('child', {
+  // 声明 props
+  props: ['message'],
+  // 就像 data 一样，prop 可以用在模板内
+  // 同样也可以在 vm 实例中像 “this.message” 这样使用
+  template: '<span>{{ message }}</span>'
+})
+</script>
+
+</html>

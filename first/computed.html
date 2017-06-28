@@ -1,0 +1,48 @@
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+
+<head>
+    v-for test
+</head>
+
+<body>
+    <div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+<div id="method-example">
+    <p>{{method_result()}}</p>
+</div>
+</body>
+
+<script>
+
+        var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message + "hahaha"
+    }
+  }
+});
+
+        var method_example = new Vue({
+            el: "#method-example",
+            data:{
+                ip : 10
+
+            },
+            methods: {
+                method_result: function(){
+                    return this.ip + 10
+                }
+            }
+        })
+</script>
+</html>

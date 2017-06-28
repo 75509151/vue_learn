@@ -1,0 +1,54 @@
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+
+<head>
+<title>css and style test</title>
+    
+</head>
+
+<body>
+    <div id="class_example" v-bind:class="classObject"> ni hao ya </div>
+    <div id="style_example" v-bind:style="{color: activeColor, fontSize: fontSize}" >
+        style bind example
+    </div> 
+    <div id="style_example2" v-bind:style="style_object">
+        style_object
+    </div>
+
+</body>
+<script>
+new Vue({
+    el: "#class_example",
+    data: {
+        isActive: true,
+        error: null
+    },
+    computed: {
+        classObject: function () {
+             return {
+      active: this.isActive && !this.error,
+      'text-danger': this.error && this.error.type === 'fatal',
+    }
+        }
+    }
+});
+
+new Vue({
+    el: "#style_example",
+    data:{
+        activeColor: "red",
+        fontSize: "1.5em"
+    }
+});
+
+new Vue({
+    el: "#style_example2",
+    data:{
+        style_object:{color: "blue", 
+            fontSize:"3em"
+        }
+    }
+})
+</script>
+
+</html>
