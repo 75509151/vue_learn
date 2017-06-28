@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+ <link rel="stylesheet" href="styles/simple-demo.css" />
+<body>
+
+<div id="app">
+
+    <table>
+        <tr>
+            <th colspan="3">父组件数据</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>{{ name }}</td>
+            <td><input type="text" v-model="name" /></td>
+        </tr>
+        <tr>
+            <td>age</td>
+            <td>{{ age }}</td>
+            <td><input type="text" v-model="age" /></td>
+        </tr>
+    </table>
+
+    <my-component v-bind:my-name="name" v-bind:my-age="age"></my-component>
+</div>
+
+<div id="counter-event-example">
+  <p>{{ total }}</p>
+  <button-counter @increment="incrementTotal"></button-counter>
+  <button-counter @increment="incrementTotal"></button-counter>
+</div>
+
+
+<template id="myComponent">
+    <table>
+        <tr>
+            <th colspan="3">子组件数据</td>
+        </tr>
+        <tr>
+            <td>my name</td>
+            <td>{{ myName }}</td>
+            <td><input type="text" v-model="myName" /></td>
+        </tr>
+        <tr>
+            <td>my age</td>
+            <td>{{ myAge }}</td>
+            <td><input type="text" v-model="myAge" /></td>
+        </tr>
+    </table>
+</template>
+
+</body>
+<script src="../vue.js"></script>
+<script>
+var vm = new Vue({
+    el: '#app',
+    data: {
+        name: 'keepfool',
+        age: 28
+    },
+    components: {
+        'my-component': {
+            template: '#myComponent',
+            props: {
+                myName: String,
+                myAge: {
+                    type: Number,
+                    // coerce: function (value) {
+                    //     // body...
+                    //     return int(value)
+                    // }
+                }
+
+            }
+        }
+    }
+})
+
+Vue.component('button-counter', {
+  template: '<button v-on:click="increment">{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    increment: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
+</script>
+
+</html>
