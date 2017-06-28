@@ -1,24 +1,25 @@
-
-
 <html>
 <script type="text/javascript" src="../vue.js"></script>
-    <head><title>
-        vue model learn
-    </title></head>
-    <body>
-    <div id="model-example">
-                <input v-model="message" placeholder="edit me">
-<p  >Message is: {{ message }}</p>
-    </div>
 
-    </body>
-    <script >
-      var model_example = new Vue({
-            el: "#model-example",
-            data:
-                {
-                    message: ""
-                }
-            });
-    </script>
+<head>
+    <title>
+        vue model learn
+    </title>
+</head>
+
+<body>
+    <div id="model-example">
+        <input v-model="message" placeholder="edit me">
+        <p>Message is: {{ message }}</p>
+    </div>
+</body>
+<script>
+var model_example = new Vue({
+    el: "#model-example",
+    data: {
+        message: ""
+    }
+});
+</script>
+
 </html>

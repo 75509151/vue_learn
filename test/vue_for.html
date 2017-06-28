@@ -40,6 +40,10 @@
             {{item}}
         </li>
     </ul>
+
+    <ul id="for_computed_example">
+        <li v-for="n in evenNumbers">{{n}}</li>
+    </ul>
 </body>
 <script>
 Vue.component('todo-item', {
@@ -67,7 +71,7 @@ new Vue({
             this.newTodoText = ''
         }
     }
-})
+});
 
 
 var simple_example = new Vue({
@@ -117,6 +121,21 @@ var for_if_example = new Vue({
 
     }
 });
+
+var for_computed_example = new Vue({
+    el: "#for_computed_example",
+    data: {
+        numbers : [1,2,3,4,5],
+
+    },
+    computed: {
+        evenNumbers: function(){
+            return this.numbers.filter(function(n){
+                return n%2 === 0
+            })
+        }
+    }
+})
 </script>
 
 </html>
