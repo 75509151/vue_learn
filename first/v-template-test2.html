@@ -1,0 +1,52 @@
+<html>
+<script type="text/javascript" src="../vue.js"></script>
+
+<head>
+    <title>
+        vue model learn
+    </title>
+</head>
+
+<body>
+<div id="app">
+  <p>Parent value: {{value}}</p>
+  <child v-model="value"></child>
+</div>
+
+<template id="child">
+   <input type="text" v-model="internalValue">
+</template>
+</body>
+<script>
+Vue.component('child', {
+  template: '#child',
+  
+  //The child has a prop named 'value'. v-model will automatically bind to this prop
+  props: ['value'],
+  data: function() {
+    return {
+      internalValue: ''
+    }
+  },
+  watch: {
+    'internalValue': function() {
+      // When the internal value changes, we $emit an event. Because this event is 
+      // named 'input', v-model will automatically update the parent value
+      this.$emit('input', this.internalValue);
+    }
+  },
+  created: function() {
+    // We initially sync the internalValue with the value passed in by the parent
+    this.internalValue = this.value;
+  }
+});
+
+new Vue({
+  el: '#app',
+  data: {
+    value: 'hello'
+  }
+});
+</script>
+
+</html>
